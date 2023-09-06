@@ -16,20 +16,3 @@ spl_autoload_register(function ($class) {
 });
 
 require base_path("Core/router.php");
-
-
-
-
-
-
-// $id = $_GET['id'];
-// $q = "SELECT * FROM posts WHERE id = ?";
-// // dd($q);
-// $posts = $db->query($q, [$id])->fetchAll();
-
-// dd($posts);
-//return
-
-// foreach ($posts as $p) {
-//     echo "<h1>" . $p['Title'] . "</h1>";
-// }

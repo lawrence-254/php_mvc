@@ -10,18 +10,32 @@ $db = new Database($config['database']);
 
 require base_path("Core/Response.php");
 
-
-
-$query = 'SELECT * FROM notes WHERE id = :id';
-$params = [':id' => $_GET['id']];
-
-$notes = $db->query($query, $params)->findOrFail();
 $creator_id = 1;
-authorize($notes['user_id'] === $creator_id);
+
+//delete
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $query = 'SELECT * FROM notes WHERE id = :id';
+    $params = [':id' => $_GET['id']];
 
 
+    $notes = $db->query($query, $params)->findOrFail();
 
-views("notes/show.view.php", [
-    'heading' => 'Note',
-    'notes' => $notes
-]);
+    authorize($notes['user_id'] === $creator_id);
+    $db->query('DELETE FROM notes WHERE id = :id', [
+        'id' => $_GET['id']
+    ]);
+} else {
+
+    $query = 'SELECT * FROM notes WHERE id = :id';
+    $params = [':id' => $_GET['id']];
+
+
+    $notes = $db->query($query, $params)->findOrFail();
+
+    authorize($notes['user_id'] === $creator_id);
+
+    views("notes/show.view.php", [
+        'heading' => 'Note',
+        'notes' => $notes
+    ]);
+}

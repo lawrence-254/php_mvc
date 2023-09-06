@@ -12,6 +12,9 @@
     <div>
         <p> <?= $notes['body'] ?></p>
     </div>
-    <a href="">Delete Note</a>
+    <form action="" method="post">
+        <input type="hidden" name="id" value="<?= $note['id'] ?>">
+        <input type="submit" class='no' value="Delete Note">
+    </form>
 </main>
 <?php require base_path('views/partials/footer.php') ?>
